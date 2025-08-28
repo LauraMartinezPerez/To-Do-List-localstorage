@@ -4,11 +4,44 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Document</title>
+    <title>To Do List</title>
+    <link rel="ico" href="assets/starsBackground.webp"/>
+    <link rel="icon"  href="assets/star.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./scss/main.scss">
+    <link rel="stylesheet" href="./scss/core/_reset.scss">
 </head>
 
 <body>
+    <header class="header">
+        <h1 class="header__title">ToDo List</h1>
+    </header>
 
+    <main class="main-section">
+        <aside class="aside-container">
+            <form class="form-new-task" action="">
+                <input class="new-task-input js-new-task-input" type="text" name="new-task" id="new-task"
+                    placeholder="Nueva tarea">
+                <button class="add-button js-add-button" type="submit">Agregar</button>
+            </form>
+        </aside>
+
+        <section class="section-container">
+            <div class="form-search-container">
+                <form class="form-search" action="">
+                    <input class="search-input" type="text" name="imput-search" id="imput-search"
+                        placeholder="Ejemplo: gym">
+                    <button class="search-button" type="submit">Buscar</button>
+                </form>
+            </div>
+            <div class="task-container">
+                <ul class="lista-container js-li">
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <script src="./js/main.js"></script>
 </body>
 
 </html>

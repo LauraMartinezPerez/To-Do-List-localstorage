@@ -1,7 +1,7 @@
 {
-	"name": "adalab-web-starter-kit",
+	"name": "To-Do-List",
 	"version": "4.0.0",
-	"description": "Adalab web starter kit",
+	"description": "Aplicación web simple de lista de tareas con gestión de pendientes.",
 	"type": "module",
 	"devDependencies": {
 		"@vituum/vite-plugin-concat": "^1.0.0",
@@ -22,9 +22,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+ssh://git@github.com:Adalab/adalab-web-starter-kit.git"
+		"url": "https://github.com/LauraMartinezPerez/To-Do-List"
 	},
-	"author": "Adalab",
+	"author": "Laura Martinez Perez",
 	"license": "MIT",
-	"homepage": "https://github.com/adalab/adalab-web-starter-kit"
+	"homepage": "https://github.com/LauraMartinezPerez?tab=repositories"
 }
