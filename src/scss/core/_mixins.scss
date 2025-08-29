@@ -1,0 +1,60 @@
+  @use 'variables' as vars;
+  
+  @mixin form-style($border-color, $bg-input, $button-bg, $button-color) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    &__input {
+        height: 60px;
+        line-height: 60px;
+        width: 100%;
+        border-radius: 20px;
+        border: 4px solid $border-color;
+        background-color: $bg-input;
+        padding: 0 10px;
+        font-size: 16px;
+        font-family: vars.$font-main;
+    }
+
+    &__input::placeholder {
+        font-family: vars.$font-subtitle;
+        font-size: 20px;
+        color: vars.$color-brown;
+        font-weight: 600;
+    }
+
+    &__button {
+        background-color: $button-bg;
+        color: $button-color;
+        border: none;
+        border-radius: 15px;
+        border: 4px solid vars.$color-brown;
+        padding: 8px 15px;
+        font-size: 20px;
+        cursor: pointer;
+        font-family: vars.$font-subtitle;
+        font-weight: 700;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        transition: scale 0.2s ease;
+        &:hover {
+            background-color: $bg-input;
+            color: $button-bg;
+            scale: 1.05;
+        }
+    }
+}
+
+
+@mixin container-box($bg-color, $border-color) {
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px;
+  padding: 15px;
+  border-radius: 30px;
+  border: 5px solid $border-color;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}

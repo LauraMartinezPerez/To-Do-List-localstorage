@@ -6,40 +6,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>To Do List</title>
     <link rel="ico" href="assets/starsBackground.webp"/>
-    <link rel="icon"  href="assets/star.webp">
+    <link rel="icon"  href="assets/happyStar.webp">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./scss/main.scss">
     <link rel="stylesheet" href="./scss/core/_reset.scss">
 </head>
 
 <body>
-    <header class="header">
-        <h1 class="header__title">ToDo List</h1>
-    </header>
+    <main class="container">
 
-    <main class="main-section">
-        <aside class="aside-container">
-            <form class="form-new-task" action="">
-                <input class="new-task-input js-new-task-input" type="text" name="new-task" id="new-task"
-                    placeholder="Nueva tarea">
-                <button class="add-button js-add-button" type="submit">Agregar</button>
-            </form>
-        </aside>
-
-        <section class="section-container">
-            <div class="form-search-container">
-                <form class="form-search" action="">
-                    <input class="search-input" type="text" name="imput-search" id="imput-search"
-                        placeholder="Ejemplo: gym">
-                    <button class="search-button" type="submit">Buscar</button>
-                </form>
+        <header class="header">
+            <div class="header__title-group">
+                <span class="header__title">Super</span>
+                <span class="header__title">ToDo List</span>
             </div>
-            <div class="task-container">
-                <ul class="lista-container js-li">
+        </header>
+
+
+        <div class="add-container">
+            <form class="add-form" action="">
+                <input class="add-form__input" type="text" name="new-task" id="new-task" placeholder="Add a new task">
+                <button class="add-form__button" type="submit">Add</button>
+            </form>
+        </div>
+
+        <section class="tasks-container">
+            <form class="search-form" action="">
+                <input class="search-form__input" type="text" name="imput-search" id="imput-search" placeholder="Search tasks">
+                <button class="search-form__button" type="submit">Search</button>
+            </form>
+            <div class="list">
+                <ul class="list__tasks">
+                    <li>task1</li>
+                    <li>task2</li>
+                    <li>task3</li>
                 </ul>
             </div>
         </section>
+
+        <footer class="footer">This website has been developed by <a class="footer__link" href="https://github.com/LauraMartinezPerez" target="_blank" rel="noopener noreferrer">Laura Martinez.</a></p>
+        </footer>
     </main>
+
 
     <script src="./js/main.js"></script>
 </body>
