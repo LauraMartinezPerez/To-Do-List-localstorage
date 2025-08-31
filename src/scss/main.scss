@@ -16,6 +16,35 @@
     transform: scale(1) rotate(0deg);
   }
 }
+.pending-tasks {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    margin: 0 auto 24px auto;
+    padding: 0 24px;
+    background: vars.$color-light-pink;
+    border-radius: 18px;
+    font-family: vars.$font-main;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: vars.$color-brown;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+
+    &__icon {
+        font-size: 2rem;
+        color: vars.$color-pink;
+        margin-right: 8px;
+    }
+
+    &__count {
+        color: vars.$color-pink;
+        font-size: 1.8rem;
+        font-family: vars.$font-title;
+        font-weight: 900;
+        margin: 0 4px;
+    }
+}
 .container {
     width: 100%;
     height: 100dvh;
