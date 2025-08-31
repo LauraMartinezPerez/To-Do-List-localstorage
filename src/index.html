@@ -36,8 +36,8 @@
 
         <div class="add-container">
             <form class="add-form" action="">
-                <input class="add-form__input" type="text" name="new-task" id="new-task" placeholder="Add a new task">
-                <button class="add-form__button" type="submit">Add</button>
+                <input class="add-form__input js-new-task" type="text" name="new-task" id="new-task" placeholder="Add a new task">
+                <button class="add-form__button js-add-btn" type="submit">Add</button>
             </form>
         </div>
 
@@ -47,22 +47,13 @@
                 <button class="search-form__button" type="submit">Search</button>
             </form>
             <div class="list">
-                <ul class="list__task">
-                    <li>
-                        <input type="checkbox" id="task-1">
-                        <label for="task-1">Task 1</label>
+                <ul class="list__task js-list-task">
+<!--                     <li>
                         <i class="fa-solid fa-circle-xmark js-x" id="task-1"></i>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="task-2">
-                        <label for="task-2">Task 2</label>
-                        <i class="fa-solid fa-circle-xmark js-x" id="task-2"></i>
-                    </li>
-                    <li>
-                        <input type="checkbox" id="task-3">
-                        <label for="task-3">Task 3</label>
-                        <i class="fa-solid fa-circle-xmark js-x" id="task-3"></i>
-                    </li>
+                        <input type="checkbox" id="task-1">
+                        <label class="task-label" for="task-1">Task 1</label>
+                    </li> -->
+
                 </ul>
             </div>
         </section>

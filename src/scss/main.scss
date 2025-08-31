@@ -164,6 +164,13 @@
     }
 }
 
+.crossed-out-task {
+    text-decoration: line-through;
+    opacity: 0.6;
+    color: vars.$color-brown;
+    transition: opacity 0.2s;
+}
+
 
 
 //@copilot haz el fotter responsive y centrado
