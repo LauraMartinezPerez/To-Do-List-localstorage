@@ -38,28 +38,85 @@
         margin: 0;
         padding: 0;
         text-align: left;
-        font-weight: 1000;
         line-height: 1;
     }
 }
 
 
 .add-container {
-@include mixins.container-box(vars.$color-yellow, vars.$color-brown);
+     @include mixins.container-box(vars.$color-yellow, vars.$color-brown);
 }
 
 .add-form {
     @include mixins.form-style(vars.$color-orange, vars.$color-bg-input, vars.$color-orange, vars.$color-bg-beige);
 }
 .tasks-container {
-@include mixins.container-box(vars.$color-sky, vars.$color-brown);
+    @include mixins.container-box(vars.$color-sky, vars.$color-brown);
+    gap: 15px;
+    box-shadow: none;
+    
 }
 .search-form {
     @include mixins.form-style(vars.$color-blue, vars.$color-bg-input, vars.$color-blue, vars.$color-bg-beige);
 }
 .list {
-    background-color: vars.$color-blue;
+    @include mixins.container-box(vars.$color-subBg-cream, vars.$color-brown);
+    border-radius: 30% 2% 30% 2% / 10% 50% 10% 50%;
+    border: 3px solid vars.$color-brown;;
+    width: 100%;
+    max-width: 900px;
+    align-items: flex-start;
+    color: vars.$color-brown;
+    font-family: vars.$font-main;
+    font-size: 20px;
+    list-style: none;
+    padding: 20px;
+    margin: 0px;
+    box-sizing: border-box;
+
+    &__task input[type="checkbox"] {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    border: 3px solid vars.$color-brown;
+    border-radius: 50% 20% 50% 20% / 10% 50% 10% 50%;
+    background: vars.$color-bg-beige;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+    transition: border-color 0.2s;
 }
+
+    &__task input[type="checkbox"]:checked {
+    background: vars.$color-yellow;
+    border-color: vars.$color-brown;
+    }
+    &__task input[type="checkbox"]:checked::after {
+      //Check sin usar tipo de fuente:  
+/*  content: '';
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: -10px;
+    width: 10px;
+    height: 25px;
+    border: solid vars.$color-brown;
+    border-width: 0 5px 5px 0;
+    transform: rotate(45deg);  */
+
+
+    content: '✔'; // '✓'
+    position: absolute;
+    left: 4px;
+    top: -12px;
+    font-size: 33px;
+    color: vars.$color-brown;
+    pointer-events: none;
+    }
+}
+
+
+
 //@copilot haz el fotter responsive y centrado
 
 .footer {
