@@ -151,7 +151,6 @@ const handleDeleteTask = (ev) => {
     }
 }
 
-
 tasksList.addEventListener("click", handleDeleteTask);
 
 //5. Contar tareas pendientes y completadas
