@@ -1,32 +1,35 @@
 @use 'core/reset';
 @use "core/variables" as vars;
-@use "core/mixins"as mixins;
+@use "core/mixins" as mixins;
 
 @keyframes twinkle {
-  0% {
-    filter: brightness(1) drop-shadow(0 0 0px vars.$color-yellow);
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    filter: brightness(1.1) drop-shadow(0 0 16px vars.$color-yellow);
-    transform: scale(1.1) rotate(3deg);
-  }
-  100% {
-    filter: brightness(1) drop-shadow(0 0 0px vars.$color-yellow);
-    transform: scale(1) rotate(0deg);
-  }
+    0% {
+        filter: brightness(1) drop-shadow(0 0 0px vars.$color-yellow);
+        transform: scale(1) rotate(0deg);
+    }
+
+    50% {
+        filter: brightness(1.1) drop-shadow(0 0 16px vars.$color-yellow);
+        transform: scale(1.1) rotate(3deg);
+    }
+
+    100% {
+        filter: brightness(1) drop-shadow(0 0 0px vars.$color-yellow);
+        transform: scale(1) rotate(0deg);
+    }
 }
-.pending-tasks {
+
+.current-tasks {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
     justify-content: flex-start;
-    gap: 12px;
-    margin: 0 auto 24px auto;
+    margin: 0 20px 24px 20px;
     padding: 0 24px;
     background: vars.$color-light-pink;
     border-radius: 18px;
     font-family: vars.$font-main;
-    font-size: 1.3rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: vars.$color-brown;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
@@ -45,15 +48,17 @@
         margin: 0 4px;
     }
 }
+
 .container {
     width: 100%;
-    height: 100dvh;
+    main-height: 100dvh;
     background-image: url("../assets/starsBackground.webp");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat; 
-    display: flex;;
-    flex-direction: column; 
+    background-repeat: no-repeat;
+    display: flex;
+    ;
+    flex-direction: column;
 
     &__star {
         position: absolute;
@@ -96,25 +101,29 @@
 
 
 .add-container {
-     @include mixins.container-box(vars.$color-yellow, vars.$color-brown);
+    @include mixins.container-box(vars.$color-yellow, vars.$color-brown);
 }
 
 .add-form {
     @include mixins.form-style(vars.$color-orange, vars.$color-bg-input, vars.$color-orange, vars.$color-bg-beige);
 }
+
 .tasks-container {
     @include mixins.container-box(vars.$color-sky, vars.$color-brown);
     gap: 15px;
     box-shadow: none;
-    
+
 }
+
 .search-form {
     @include mixins.form-style(vars.$color-blue, vars.$color-bg-input, vars.$color-blue, vars.$color-bg-beige);
 }
+
 .list {
     @include mixins.container-box(vars.$color-subBg-cream, vars.$color-brown);
     border-radius: 30% 2% 30% 2% / 10% 50% 10% 50%;
-    border: 3px solid vars.$color-brown;;
+    border: 3px solid vars.$color-brown;
+    ;
     width: 100%;
     max-width: 900px;
     align-items: flex-start;
@@ -127,36 +136,39 @@
     box-sizing: border-box;
 
     &__task input[type="checkbox"] {
-    appearance: none;
-    width: 30px;
-    height: 30px;
-    border: 3px solid vars.$color-brown;
-    border-radius: 50% 20% 50% 20% / 10% 50% 10% 50%;
-    background: vars.$color-bg-beige;
-    cursor: pointer;
-    position: relative;
-    vertical-align: middle;
-    transition: border-color 0.2s;
-}
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        border: 3px solid vars.$color-brown;
+        border-radius: 50% 20% 50% 20% / 10% 50% 10% 50%;
+        background: vars.$color-bg-beige;
+        cursor: pointer;
+        position: relative;
+        vertical-align: middle;
+        transition: border-color 0.2s;
+    }
 
     &__task input[type="checkbox"]:checked {
-    background: vars.$color-yellow;
-    border-color: vars.$color-brown;
+        background: vars.$color-yellow;
+        border-color: vars.$color-brown;
     }
+
     &__task input[type="checkbox"]:checked::after {
-    content: '✔'; // '✓'
-    position: absolute;
-    left: 4px;
-    top: -12px;
-    font-size: 33px;
-    color: vars.$color-brown;
-    pointer-events: none;
+        content: '✔'; // '✓'
+        position: absolute;
+        left: 4px;
+        top: -12px;
+        font-size: 33px;
+        color: vars.$color-brown;
+        pointer-events: none;
     }
+
     &__task .fa-solid {
         cursor: pointer;
         color: vars.$color-brown;
         margin-right: 1rem;
         transition: color 0.2s ease;
+
         &:hover {
             color: vars.$color-orange;
             scale: 1.2;
@@ -171,10 +183,6 @@
     transition: opacity 0.2s;
 }
 
-
-
-//@copilot haz el fotter responsive y centrado
-
 .footer {
     margin-top: auto;
     text-align: center;
@@ -183,8 +191,9 @@
     font-size: 13px;
 
     &__link {
-    color: vars.$color-brown;
-    text-decoration: underline;
-    };
-}
+        color: vars.$color-brown;
+        text-decoration: underline;
+    }
 
+    ;
+}

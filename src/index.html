@@ -5,9 +5,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>To Do List</title>
-    <link rel="ico" href="assets/starsBackground.webp"/>
-    <link rel="icon"  href="assets/happyStar.webp">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&family=Permanent+Marker&family=Rock+Salt&family=Gloria+Hallelujah&family=Caveat:wght@700&family=Indie+Flower&family=Fredoka:wght@700&family=Luckiest+Guy&display=swap" rel="stylesheet">
+    <link rel="ico" href="assets/starsBackground.webp" />
+    <link rel="icon" href="assets/happyStar.webp">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&family=Nunito:wght@400;700&family=Poppins:wght@400;700&family=Permanent+Marker&family=Rock+Salt&family=Gloria+Hallelujah&family=Caveat:wght@700&family=Indie+Flower&family=Fredoka:wght@700&family=Luckiest+Guy&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="./scss/main.scss">
     <link rel="stylesheet" href="./scss/core/_reset.scss">
@@ -16,7 +18,10 @@
 <body>
     <main class="container">
 
+        <!-- Imagen decorativa principal -->
         <img class="container__star" src="./assets/happyStar.webp" alt="Happy star">
+
+        <!-- Encabezado con título de la aplicación -->
         <header class="header">
             <div class="header__title-group">
                 <span class="header__title">Super</span>
@@ -24,36 +29,52 @@
             </div>
         </header>
 
-        <!-- Indicador de tareas pendientes -->
-        <div class="pending-tasks">
-            <span class="pending-tasks__icon">
-                <i class="fa-solid fa-list-check"></i>
-            </span>
-            <span class="pending-tasks__text">You have 
-                <span class="pending-tasks__count">3</span> 
-            tasks pending</span>
+        <!-- Indicador de tareas pendientes y completadas -->
+        <div class="current-tasks">
+            <span class="current-tasks__text">
+                <span class="current-tasks__icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </span>You have
+                <span class="current-tasks__count js-pending-count">3</span>
+                tasks pending</span>
+
+            <span class="current-tasks__text">
+                <span class="current-tasks__icon">
+                    <i class="fa-solid fa-list-check"></i>
+                </span>You have
+                <span class="current-tasks__count js-completed-count">3</span>
+                tasks completed</span>
         </div>
 
+        <!-- Formulario para añadir nuevas tareas -->
         <div class="add-container">
             <form class="add-form" action="">
-                <input class="add-form__input js-new-input" type="text" name="new-task" id="new-task" placeholder="Add a new task">
+                <input class="add-form__input js-new-input" type="text" name="new-task" id="new-task"
+                    placeholder="Add a new task">
                 <button class="add-form__button js-add-btn" type="submit">Add</button>
             </form>
         </div>
 
+        <!-- Contenedor principal de la lista de tareas -->
         <section class="tasks-container">
+            <!-- Formulario de búsqueda de tareas -->
             <form class="search-form" action="">
-                <input class="search-form__input js-search-input" type="text" name="imput-search" id="imput-search" placeholder="Search tasks">
+                <input class="search-form__input js-search-input" type="text" name="imput-search" id="imput-search"
+                    placeholder="Search tasks">
                 <button class="search-form__button js-search-btn" type="submit">Search</button>
             </form>
+
+            <!-- Lista dinámica donde se muestran las tareas -->
             <div class="list">
                 <ul class="list__task js-list-task">
                 </ul>
             </div>
         </section>
 
-        <footer class="footer">This website has been developed by <a class="footer__link" href="https://github.com/LauraMartinezPerez" target="_blank" rel="noopener noreferrer">Laura Martinez</a></p>
-        </footer>
+        <!-- Pie de página con autoría y enlace a GitHub -->
+        <footer class="footer">This website has been developed by <a class="footer__link"
+                href="https://github.com/LauraMartinezPerez" target="_blank" rel="noopener noreferrer">Laura
+                Martinez</a></footer>
     </main>
 
 

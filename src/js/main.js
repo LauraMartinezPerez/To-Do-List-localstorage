@@ -7,7 +7,7 @@
     2. Cuando se marque la tarea como completada, tacharla.
     3. Cuando se haga click en search mostrar solo las tareas que contengan el input. 
     4. Cuando se haga click en el icono de cerrar de cada task, borrar la tareas.
-    5. Mostrar una frase que indique cuantas tareas hay pendientes.
+    5. Mostrar una frase que indique cuantas tareas hay pendientes y completadas.
 */
 
 const tasksList = document.querySelector('.js-list-task');
@@ -15,6 +15,9 @@ const newTaskInput = document.querySelector('.js-new-input');
 const addButton = document.querySelector('.add-form__button');
 const searchInput = document.querySelector('.js-search-input');
 const searchButton = document.querySelector('.js-search-btn');
+const xbutton = document.querySelector('.js-x');
+const pendingCount = document.querySelector('.js-pending-count');
+const completedCount = document.querySelector('.js-completed-count');
 
 const tasks = [
     { name: 'Recoger setas en el campo', completed: true, id: 1 },
@@ -24,7 +27,7 @@ const tasks = [
 ];
 
 
-//1. Añadir nueva tarea
+//Pintar las tareas en la lista
 
  const renderTasks = () => {
     let list = '';
@@ -46,21 +49,26 @@ const tasks = [
 
      for (const task of tasks) {
         list += `<li>
-            <i class="fa-solid fa-circle-xmark js-x" id="corss-${task.id}"></i>
+            <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
             <input type="checkbox" id="${task.id}" ${task.completed ? 'checked' : ''}>
             <label class="${task.completed ? 'crossed-out-task' : ''}" for="${task.id}">${task.name}</label>
             </li>`;
     }
 
     tasksList.innerHTML = list;
+
 }; 
+
+//1. Añadir nueva tarea
 
  const handleclickAdd = ev => {
     ev.preventDefault();
     const newTaskInputValue = newTaskInput.value;
-    const addTask = tasks.push({ name: newTaskInputValue, completed: false, id: tasks.length + 1 });
+    tasks.push({ name: newTaskInputValue, completed: false, id: tasks.length + 1 });
 
     renderTasks();
+    countTasks();
+
     newTaskInput.value = '';
 };
 
@@ -69,7 +77,7 @@ addButton.addEventListener('click', handleclickAdd);
 //2. Tachar tarea completada
  
 const handleCheckedTask = event => {
-    const taskId = parseInt(event.target.id); // ID del elemento clicado
+    const taskId = parseInt(event.target.id); 
 
     if (!taskId) return;
 
@@ -79,39 +87,77 @@ const handleCheckedTask = event => {
         clickedTask.completed = !clickedTask.completed;
     }
     renderTasks();
+    countTasks();
 };
 
 tasksList.addEventListener('click', handleCheckedTask); 
 
-renderTasks();
+
 
 //3. Buscar tarea
 
- 
+const renderFilteredTasks = (filteredTasks) => {
+    let list = '';
+    for (const task of filteredTasks) {
+        list += `<li>
+            <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
+            <input type="checkbox" id="${task.id}" ${task.completed ? 'checked' : ''}>
+            <label class="${task.completed ? 'crossed-out-task' : ''}" for="${task.id}">${task.name}</label>
+            </li>`;
+    }
+    tasksList.innerHTML = list;
+}
 
 const handleSearchTask = (ev) => {
     ev.preventDefault();
     const searchInputValue = searchInput.value;
-    const filterTasks = (task) => {
-        /*  console.log(task); */
-        return task.name.toLowerCase().includes(searchInputValue.toLowerCase());
-    }
-
-    const filteredTasks = tasks.filter(filterTasks);
-    /* console.log(filteredTasks); */
-    const renderFilteredTasks = () => {
-        let list = '';
-        for (const filteredTask of filteredTasks) {
-            list += `<li>
-                <i class="fa-solid fa-circle-xmark js-x" id="corss-${filteredTask.id}"></i>
-                <input type="checkbox" id="${filteredTask.id}" ${filteredTask.completed ? 'checked' : ''}>
-                <label class="${filteredTask.completed ? 'crossed-out-task' : ''}" for="${filteredTask.id}">${filteredTask.name}</label>
-                </li>`;
-        }
-        tasksList.innerHTML = list;
-    };
-    renderFilteredTasks();
+    const filteredTasks = tasks.filter(task => 
+        task.name.toLowerCase().includes(searchInputValue.toLowerCase())
+    );
+    
+    renderFilteredTasks(filteredTasks);
+    countTasks(filteredTasks); 
+    searchInput.value = '';
 }
 
 searchButton.addEventListener("click", handleSearchTask);
 
+//4. Borrar tarea
+
+const handleDeleteTask = (ev) => {
+    // Verifica si el click fue en el botón de eliminar
+    if(ev.target.classList.contains("js-x")) {
+        // Obtiene el ID de la tarea a eliminar
+        const taskId = parseInt(ev.target.id);
+        
+        // Encuentra el índice de la tarea en el array
+        const taskIndex = tasks.findIndex(task => task.id === taskId);
+        
+        // Si encuentra la tarea, la elimina
+        if (taskIndex !== -1) {
+            tasks.splice(taskIndex, 1);
+            //pinta las tareas y el contador actualizados
+            renderTasks();
+            countTasks();
+        }
+    }
+}
+
+
+tasksList.addEventListener("click", handleDeleteTask);
+
+//5. Contar tareas pendientes y completadas
+
+const countTasks = (tasksToCount = tasks) => {
+    const completedTasks = tasksToCount.filter(task => task.completed).length;
+    const pendingTasks = tasksToCount.filter(task => !task.completed).length;
+
+    completedCount.textContent = completedTasks;
+    pendingCount.textContent = pendingTasks;
+        if (tasks.length === 0) {
+        console.log("No hay tareas en la lista");
+    }
+}
+
+renderTasks();
+countTasks();
