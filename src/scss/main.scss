@@ -111,8 +111,6 @@
 .tasks-container {
     @include mixins.container-box(vars.$color-sky, vars.$color-brown);
     gap: 15px;
-    box-shadow: none;
-
 }
 
 .search-form {
