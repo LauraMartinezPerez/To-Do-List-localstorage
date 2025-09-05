@@ -1,15 +1,6 @@
 'use strict';
 
-//FUNCIONALIDAD
-
-/*
-    1. Cuando se haga clic en add, añadir la tarea al array, pintar las tareas y limpiar el input.
-    2. Cuando se marque la tarea como completada, tacharla.
-    3. Cuando se haga click en search mostrar solo las tareas que contengan el input. 
-    4. Cuando se haga click en el icono de cerrar de cada task, borrar la tareas.
-    5. Mostrar una frase que indique cuantas tareas hay pendientes y completadas.
-*/
-
+// Selecciona elementos del DOM necesarios para la aplicación
 const tasksList = document.querySelector('.js-list-task');
 const newTaskInput = document.querySelector('.js-new-input');
 const addButton = document.querySelector('.add-form__button');
@@ -19,6 +10,7 @@ const xbutton = document.querySelector('.js-x');
 const pendingCount = document.querySelector('.js-pending-count');
 const completedCount = document.querySelector('.js-completed-count');
 
+// Array inicial de tareas con algunos ejemplos
 const tasks = [
     { name: 'Recoger setas en el campo', completed: true, id: 1 },
     { name: 'Comprar pilas', completed: true, id: 2 },
@@ -27,9 +19,9 @@ const tasks = [
 ];
 
 
-//Pintar las tareas en la lista
-
+// Función para pintar todas las tareas en el DOM
  const renderTasks = () => {
+    // Inicializa string vacío para ir concatenando el HTML
     let list = '';
  
     /*     CONDICINAL SIMPLE:
@@ -47,6 +39,7 @@ const tasks = [
         </li>`;
     } */
 
+    // Recorre el array de tareas y genera el HTML para cada una
      for (const task of tasks) {
         list += `<li>
             <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
@@ -54,21 +47,31 @@ const tasks = [
             <label class="${task.completed ? 'crossed-out-task' : ''}" for="${task.id}">${task.name}</label>
             </li>`;
     }
-
+    // Inserta todo el HTML generado en el contenedor de tareas
     tasksList.innerHTML = list;
 
 }; 
 
 //1. Añadir nueva tarea
 
- const handleclickAdd = ev => {
+// Función manejadora para añadir nuevas tareas
+const handleclickAdd = ev => {
+    // Previene el comportamiento por defecto del formulario
     ev.preventDefault();
+    // Recoge el texto introducido en el input
     const newTaskInputValue = newTaskInput.value;
-    tasks.push({ name: newTaskInputValue, completed: false, id: tasks.length + 1 });
-
+    // Genera un ID único encontrando el ID máximo actual y sumando 1
+    const maxId = Math.max(...tasks.map(task => task.id), 0);
+    const newId = maxId + 1;
+    // Añade la nueva tarea al array
+    tasks.push({ 
+        name: newTaskInputValue, 
+        completed: false, 
+        id: newId 
+    });
+    // Actualiza la vista, los contadores y limpia el input
     renderTasks();
     countTasks();
-
     newTaskInput.value = '';
 };
 
@@ -76,16 +79,19 @@ addButton.addEventListener('click', handleclickAdd);
 
 //2. Tachar tarea completada
  
+// Función manejadora para marcar/desmarcar tareas como completadas
 const handleCheckedTask = event => {
+    // Convierte el ID de string a número
     const taskId = parseInt(event.target.id); 
-
+    // Si no hay ID válido, sale de la función
     if (!taskId) return;
-
+    // Busca la tarea clickada en el array
     const clickedTask = tasks.find(task => task.id === taskId);
-
+    // Invierte su estado. Si esta completada, la marca como no completada y viceversa
     if (clickedTask) {
         clickedTask.completed = !clickedTask.completed;
     }
+     // Actualiza la vista y los contadores
     renderTasks();
     countTasks();
 };
@@ -93,10 +99,26 @@ const handleCheckedTask = event => {
 tasksList.addEventListener('click', handleCheckedTask); 
 
 
-
 //3. Buscar tarea
 
+// Función manejadora para buscar tareas
+const handleSearchTask = (ev) => {
+    ev.preventDefault();
+     // Obtiene el valor del texto de búsqueda
+    const searchInputValue = searchInput.value;
+    // Filtra las tareas que contengan el texto sin hacer distinción de mayúsculas/minúsculas
+    const filteredTasks = tasks.filter(task => 
+        task.name.toLowerCase().includes(searchInputValue.toLowerCase())
+    );
+    // Muestra las tareas filtradas, actualiza contadores y limpia el input
+    renderFilteredTasks(filteredTasks);
+    countTasks(filteredTasks); 
+    searchInput.value = '';
+}
+
+// Función para mostrar tareas filtradas
 const renderFilteredTasks = (filteredTasks) => {
+     // Similar a renderTasks pero usando el array filtrado
     let list = '';
     for (const task of filteredTasks) {
         list += `<li>
@@ -108,18 +130,6 @@ const renderFilteredTasks = (filteredTasks) => {
     tasksList.innerHTML = list;
 }
 
-const handleSearchTask = (ev) => {
-    ev.preventDefault();
-    const searchInputValue = searchInput.value;
-    const filteredTasks = tasks.filter(task => 
-        task.name.toLowerCase().includes(searchInputValue.toLowerCase())
-    );
-    
-    renderFilteredTasks(filteredTasks);
-    countTasks(filteredTasks); 
-    searchInput.value = '';
-}
-
 searchButton.addEventListener("click", handleSearchTask);
 
 //4. Borrar tarea
@@ -128,11 +138,9 @@ const handleDeleteTask = (ev) => {
     // Verifica si el click fue en el botón de eliminar
     if(ev.target.classList.contains("js-x")) {
         // Obtiene el ID de la tarea a eliminar
-        const taskId = parseInt(ev.target.id);
-        
+        const taskId = parseInt(ev.target.id);        
         // Encuentra el índice de la tarea en el array
-        const taskIndex = tasks.findIndex(task => task.id === taskId);
-        
+        const taskIndex = tasks.findIndex(task => task.id === taskId);        
         // Si encuentra la tarea, la elimina
         if (taskIndex !== -1) {
             tasks.splice(taskIndex, 1);
@@ -148,16 +156,20 @@ tasksList.addEventListener("click", handleDeleteTask);
 
 //5. Contar tareas pendientes y completadas
 
+// Función para contar tareas pendientes y completadas
 const countTasks = (tasksToCount = tasks) => {
+    // Cuenta tareas completadas y pendientes
     const completedTasks = tasksToCount.filter(task => task.completed).length;
     const pendingTasks = tasksToCount.filter(task => !task.completed).length;
-
+    // Actualiza los contadores en el DOM
     completedCount.textContent = completedTasks;
     pendingCount.textContent = pendingTasks;
         if (tasks.length === 0) {
+        // Avisa en consola si no hay tareas
         console.log("No hay tareas en la lista");
     }
 }
 
+// Renderiza las tareas iniciales y los contadores al cargar la página
 renderTasks();
 countTasks();
