@@ -12,9 +12,9 @@ const completedCount = document.querySelector('.js-completed-count');
 
 // Array inicial de tareas con algunos ejemplos
 const tasks = [
-    { name: 'Recoger setas en el campo', completed: true, id: 1 },
-    { name: 'Comprar pilas', completed: true, id: 2 },
-    { name: 'Poner una lavadora de blancos', completed: true, id: 3 },
+    { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
+    { name: 'Comprar fruta', completed: true, id: 2 },
+    { name: 'Poner una lavadora', completed: true, id: 3 },
     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
 ];
 
