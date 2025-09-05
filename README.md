@@ -11,7 +11,7 @@
 
 ## Demo
 
-_(por ahora local con `npm run dev` y enlace [SuperToDoList](https://github.com/LauraMartinezPerez) )_
+_(por ahora local con `npm run dev` y enlace [SuperToDoList](https://lauramartinezperez.github.io/To-Do-List/) )_
 
 ## ✨ Funcionalidades
 
