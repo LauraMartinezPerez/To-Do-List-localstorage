@@ -10,31 +10,16 @@ const xbutton = document.querySelector('.js-x');
 const pendingCount = document.querySelector('.js-pending-count');
 const completedCount = document.querySelector('.js-completed-count');
 
-//Variables para almacenar la información del usuario de github y la url del endpoint
-const gitHubUser = "LauraMartinezPerez";
-const serverUrl = `https://dev.adalab.es/api/todo/${gitHubUser}`;
 
 // Array inicial de tareas con algunos ejemplos
-let tasks = [];
-/* [
+let tasks = 
+ [
     { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
     { name: 'Comprar fruta', completed: true, id: 2 },
     { name: 'Poner una lavadora', completed: true, id: 3 },
     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
-]; */
+]; 
 
-//Conexión con servidor para cargar y guardar tareas
-const fetchTasks = () => {
-    fetch(serverUrl)
-    .then((response) => response.json())
-    .then ((data) => {
-        console.log(data);
-        tasks = data.results;
-        renderTasks();
-        countTasks();
-    })
-    .catch(error => console.error('No se han podido cargar las tareas:', error));
-}
 const renderLoading = () => {
     tasksList.innerHTML = '<li>Cargando tareas...</li>';
 };
@@ -190,5 +175,5 @@ const countTasks = (tasksToCount = tasks) => {
 }
 
 // Renderiza las tareas iniciales y los contadores al cargar la página
-fetchTasks();
+renderTasks();
 countTasks();
