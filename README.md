@@ -5,13 +5,13 @@
 ## 📝 De momento solo en mobile design
 
 ### 🚧 Funcionalidades en proceso
-- 🔌 Llamadas al servidor con `fetch` (CRUD completo).
+
 - 💾 Persistencia local con `localStorage` como fallback.
 - 📱 Optimización **responsive** para móviles y tablets.
 
 ## Demo
 
-_(por ahora local con `npm run dev` y enlace [SuperToDoList](https://lauramartinezperez.github.io/To-Do-List/) )_
+_(por ahora local con `npm run dev` y enlace [SuperToDoList](https://lauramartinezperez.github.io/To-Do-List-localstorage/) )_
 
 ## ✨ Funcionalidades
 
