@@ -10,17 +10,74 @@ const xbutton = document.querySelector('.js-x');
 const pendingCount = document.querySelector('.js-pending-count');
 const completedCount = document.querySelector('.js-completed-count');
 
+//Variables para almacenar la información del usuario de github y la url del endpoint
+const gitHubUser = "LauraMartinezPerez";
+const serverUrl = `https://dev.adalab.es/api/todo/${gitHubUser}`;
+const serverUrlTodo = "https://dev.adalab.es/api/todo";
+
 // Array inicial de tareas con algunos ejemplos
-const tasks = [
+let tasks = [];
+/* [
     { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
     { name: 'Comprar fruta', completed: true, id: 2 },
     { name: 'Poner una lavadora', completed: true, id: 3 },
     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
-];
+]; */
 
+//Conexión con servidor para cargar y guardar tareas
+// Añade esta constante con tus otras constantes
+const loadingOverlay = document.querySelector('.js-loading-overlay');
+
+// Añade estas funciones para controlar el overlay
+const showLoading = () => {
+    loadingOverlay.classList.add('visible');
+};
+
+const hideLoading = () => {
+    loadingOverlay.classList.remove('visible');
+};
+
+// Modifica tu función fetchTasks
+const fetchTasks = () => {
+    showLoading(); // Muestra el overlay
+    renderLoading(); // Mantén esto si quieres mostrar también el mensaje en la lista
+    
+    fetch(serverUrlTodo)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            tasks = data.results;
+            renderTasks(tasks);
+            countTasks(tasks);
+            hideLoading(); // Oculta el overlay al terminar
+        })
+        .catch(error => {
+            console.error('Error al cargar las tareas:', error);
+            renderError('Error al cargar las tareas. Por favor, inténtalo de nuevo más tarde. 🙁');
+            tasks = [];
+            countTasks(tasks);
+            hideLoading(); // Oculta el overlay incluso si hay error
+        });
+}
+
+const renderError = (errorMessage) => {
+    tasksList.innerHTML = `
+        <li class="error-message">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            ${errorMessage}
+        </li>`;
+};
+
+const renderLoading = () => {
+    tasksList.innerHTML = '<li>Cargando tareas...</li>';
+};
 
 // Función para pintar todas las tareas en el DOM
- const renderTasks = () => {
+ const renderTasks = (tasksToRender) => {
     // Inicializa string vacío para ir concatenando el HTML
     let list = '';
  
@@ -40,7 +97,7 @@ const tasks = [
     } */
 
     // Recorre el array de tareas y genera el HTML para cada una
-     for (const task of tasks) {
+     for (const task of tasksToRender) {
         list += `<li>
             <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
             <input type="checkbox" id="${task.id}" ${task.completed ? 'checked' : ''}>
@@ -70,8 +127,8 @@ const handleclickAdd = ev => {
         id: newId 
     });
     // Actualiza la vista, los contadores y limpia el input
-    renderTasks();
-    countTasks();
+    renderTasks(tasks);
+    countTasks(tasks);
     newTaskInput.value = '';
 };
 
@@ -92,8 +149,8 @@ const handleCheckedTask = event => {
         clickedTask.completed = !clickedTask.completed;
     }
      // Actualiza la vista y los contadores
-    renderTasks();
-    countTasks();
+    renderTasks(tasks);
+    countTasks(tasks);
 };
 
 tasksList.addEventListener('click', handleCheckedTask); 
@@ -145,8 +202,8 @@ const handleDeleteTask = (ev) => {
         if (taskIndex !== -1) {
             tasks.splice(taskIndex, 1);
             //pinta las tareas y el contador actualizados
-            renderTasks();
-            countTasks();
+            renderTasks(tasks);
+            countTasks(tasks);
         }
     }
 }
@@ -156,19 +213,25 @@ tasksList.addEventListener("click", handleDeleteTask);
 //5. Contar tareas pendientes y completadas
 
 // Función para contar tareas pendientes y completadas
-const countTasks = (tasksToCount = tasks) => {
+const countTasks = (tasksToCount) => {
     // Cuenta tareas completadas y pendientes
     const completedTasks = tasksToCount.filter(task => task.completed).length;
     const pendingTasks = tasksToCount.filter(task => !task.completed).length;
     // Actualiza los contadores en el DOM
     completedCount.textContent = completedTasks;
     pendingCount.textContent = pendingTasks;
-        if (tasks.length === 0) {
+        if (tasksToCount.length === 0) {
         // Avisa en consola si no hay tareas
         console.log("No hay tareas en la lista");
     }
 }
 
 // Renderiza las tareas iniciales y los contadores al cargar la página
-renderTasks();
-countTasks();
+fetchTasks();
+
+
+
+localStorage.setItem("tasks", "tareas");
+
+const tarea = localStorage.getItem("tasks");
+
