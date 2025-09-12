@@ -1,5 +1,7 @@
 @use 'variables' as vars;
 
+// Aviso: cambiar map-get() por map.get() en futuras versiones de Sass
+
 $breakpoints: (
     tablet: 768px,
     desktop: 1200px
