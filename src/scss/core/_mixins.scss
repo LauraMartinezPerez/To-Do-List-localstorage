@@ -27,7 +27,7 @@ $breakpoints: (
     &__input::placeholder {
     font-family: vars.$font-main;
     font-size: 20px;
-    color: rgba(vars.$color-brown, 0.6);
+    color: vars.$color-brown;
     font-weight: 600;
     }
 
@@ -71,12 +71,12 @@ $breakpoints: (
             height: 60px;
             font-size: 20px;
             padding: 0 20px;
-        }
+            }
 
         &__button {
             padding: 8px 25px;
             font-size: 24px;
-        }
+            }
     }
 }
 
