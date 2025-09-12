@@ -1,62 +1,104 @@
-  @use 'variables' as vars;
-  
-  @mixin form-style($border-color, $bg-input, $button-bg, $button-color) {
+@use 'variables' as vars;
+
+$breakpoints: (
+    tablet: 768px,
+    desktop: 1200px
+);  
+
+@mixin form-style($border-color, $bg-input, $button-bg, $button-color) {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    width: 100%;
+    width: 90%;
 
     &__input {
-        height: 60px;
-        line-height: 60px;
-        width: 100%;
-        border-radius: 20px;
-        border: 4px solid $border-color;
-        background-color: $bg-input;
-        padding: 0 10px;
-        font-size: 16px;
-        font-family: vars.$font-main;
+    height: 60px;
+    line-height: 60px;
+    width: 100%;
+    border-radius: 20px;
+    border: 4px solid $border-color;
+    background-color: $bg-input;
+    padding: 0 10px;
+    font-size: 16px;
+    font-family: vars.$font-main;
     }
 
     &__input::placeholder {
-        font-family: vars.$font-main;
-        font-size: 20px;
-        color: vars.$color-brown;
-        font-weight: 600;
+    font-family: vars.$font-main;
+    font-size: 20px;
+    color: rgba(vars.$color-brown, 0.6);
+    font-weight: 600;
     }
 
     &__button {
-        background-color: $button-bg;
-        color: $button-color;
-        border: none;
-        border-radius: 15px;
-        border: 4px solid vars.$color-brown;
-        padding: 8px 15px;
-        font-size: 20px;
-        cursor: pointer;
-        font-family: vars.$font-button;
-        font-weight: 700;
-        transition: background-color 0.2s ease, transform 0.1s ease;
-        transition: scale 0.2s ease;
+    background-color: $button-bg;
+    color: $button-color;
+    border: none;
+    border-radius: 15px;
+    border: 4px solid vars.$color-brown;
+    padding: 8px 15px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: vars.$font-button;
+    font-weight: 700;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    transition: scale 0.2s ease;
         &:hover {
-            background-color: $bg-input;
-            color: $button-bg;
-            scale: 1.05;
+        background-color: $bg-input;
+        color: $button-bg;
+        scale: 1.05;
+        }
+    }
+
+  // Media queries para tablet
+    @media (min-width: map-get($breakpoints, tablet)) {
+        &__input {
+        height: 70px;
+        font-size: 18px;
+        padding: 0 15px;
+        }
+
+        &__button {
+            padding: 10px 20px;
+            font-size: 22px;
+        }
+    }
+
+    // Media queries para desktop
+    @media (min-width: map-get($breakpoints, desktop)) {
+        &__input {
+            height: 60px;
+            font-size: 20px;
+            padding: 0 20px;
+        }
+
+        &__button {
+            padding: 8px 25px;
+            font-size: 24px;
         }
     }
 }
 
 
-@mixin container-box($bg-color, $border-color) {
-  background-color: $bg-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 30px;
-  padding: 15px;
-  border-radius: 30px;
-  border: 5px solid $border-color;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  margin-bottom: 20px;
+@mixin container-box($bg-color, $border-color, $tablet-width: 70%, $desktop-width: 50%) {
+    background-color: $bg-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+    padding: 15px;
+    border-radius: 30px;
+    border: 5px solid $border-color;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    width: 90%;
+
+    @media (min-width: map-get($breakpoints, tablet)) {
+    width: $tablet-width; 
+    }
+
+    @media (min-width: map-get($breakpoints, desktop)) {
+    width: $desktop-width; 
+    }
 }

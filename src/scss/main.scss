@@ -19,52 +19,22 @@
     }
 }
 
-
-.current-tasks {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: flex-start;
-    margin: 0 20px 24px 20px;
-    padding: 0 24px;
-    background: vars.$color-light-pink;
-    border-radius: 18px;
-    font-family: vars.$font-main;
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: vars.$color-brown;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-
-    &__icon {
-        font-size: 2rem;
-        color: vars.$color-pink;
-        margin-right: 8px;
-    }
-
-    &__count {
-        color: vars.$color-pink;
-        font-size: 1.8rem;
-        font-family: vars.$font-title;
-        font-weight: 900;
-        margin: 0 4px;
-    }
-}
-
 .container {
     width: 100%;
-    main-height: 100dvh;
+    height: 100dvh;
     background-image: url("../assets/starsBackground.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
-    ;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     &__star {
         position: absolute;
         width: 50vw;
-        max-width: 300px;
+        max-width: 200px;
         height: auto;
         top: 1%;
         left: 50%;
@@ -100,6 +70,44 @@
     }
 }
 
+.current-tasks {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 20px 24px 20px;
+    padding: 0 24px;
+    background: vars.$color-light-pink;
+    width: 90%;
+    border-radius: 18px;
+    font-family: vars.$font-main;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: vars.$color-brown;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    /* Media query for tablet */
+    @media (min-width: 768px) {
+        width: 50%;
+    }
+    /* Media query for desktop */
+    @media (min-width: 1200px) {
+        width: 30%;
+    }
+
+    &__icon {
+        font-size: 1.5rem;
+        color: vars.$color-pink;
+        margin-right: 8px;
+    }
+
+    &__count {
+        color: vars.$color-pink;
+        font-size: 1.5rem;
+        font-family: vars.$font-title;
+        font-weight: 900;
+        margin: 0 4px;
+    }
+}
 
 .add-container {
     @include mixins.container-box(vars.$color-yellow, vars.$color-brown);
@@ -122,8 +130,8 @@
     @include mixins.container-box(vars.$color-subBg-cream, vars.$color-brown);
     border-radius: 30% 2% 30% 2% / 10% 50% 10% 50%;
     border: 3px solid vars.$color-brown;
-    ;
     width: 100%;
+    min-height: 200px;
     max-width: 900px;
     align-items: flex-start;
     color: vars.$color-brown;
@@ -193,6 +201,4 @@
         color: vars.$color-brown;
         text-decoration: underline;
     }
-
-    ;
 }

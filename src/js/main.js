@@ -11,15 +11,11 @@ const pendingCount = document.querySelector('.js-pending-count');
 const completedCount = document.querySelector('.js-completed-count');
 
 
-// =====================
-// Estado inicial
-// =====================
 // Array inicial de tareas
 let tasks = [];
 
-// =====================
-// Funciones de LocalStorage
-// =====================
+
+// Funciones de LocalStorage:
 
 // Guarda el array de tareas en LocalStorage
 const saveTasks = () => {
@@ -33,9 +29,7 @@ const loadTasks = () => {
     }
 }
 
-// =====================
-// Renderizado de tareas
-// =====================
+// Renderizado de tareas:
 
 // Renderizar todas las tareas en el DOM
  const renderTasks = () => {
@@ -83,9 +77,8 @@ const renderFilteredTasks = (filteredTasks) => {
     tasksList.innerHTML = list;
 }
 
-// =====================
-// Funciones de eventos
-// =====================
+
+// Funciones de eventos:
 
 // Añadir nueva tarea
 const handleclickAdd = ev => {
@@ -184,9 +177,9 @@ const countTasks = (tasksToCount = tasks) => {
     }
 }
 
-// =====================
+
 // Inicialización
-// =====================
-loadTasks();                // Carga tareas guardadas al arrancar
-renderTasks();              // Muestra tareas en pantalla
-countTasks();               // Actualiza contadores
+
+loadTasks();    // Carga tareas guardadas al arrancar
+renderTasks();  // Muestra tareas en pantalla
+countTasks();   // Actualiza contadores
