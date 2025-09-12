@@ -14,36 +14,30 @@ const completedCount = document.querySelector('.js-completed-count');
 // =====================
 // Estado inicial
 // =====================
-// Array inicial de tareas con algunos ejemplos
+// Array inicial de tareas
 let tasks = [];
-/*  [
-    { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
-    { name: 'Comprar fruta', completed: true, id: 2 },
-    { name: 'Poner una lavadora', completed: true, id: 3 },
-    { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
-];  */
 
 // =====================
 // Funciones de LocalStorage
 // =====================
 
 // Guarda el array de tareas en LocalStorage
-const saveTasksToLocalStorage = () => {
-  localStorage.setItem('savedTasks', JSON.stringify(tasks));
-};
+const saveTasks = () => {
+   localStorage.setItem("savedTasks", JSON.stringify(tasks));
+}
 // Carga tareas guardadas en LocalStorage
-const loadTasksFromLocalStorage = () => {
-  const savedTasks = localStorage.getItem('savedTasks');
-  if (savedTasks) {
-    tasks = JSON.parse(savedTasks);
-  }
-};
+const loadTasks = () => {
+    const savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+    if (savedTasks) {
+        tasks = savedTasks;
+    }
+}
 
 // =====================
 // Renderizado de tareas
 // =====================
 
-// Función para renderizar todas las tareas en el DOM
+// Renderizar todas las tareas en el DOM
  const renderTasks = () => {
     // Inicializa string vacío para ir concatenando el HTML
     let list = '';
@@ -92,9 +86,8 @@ const renderFilteredTasks = (filteredTasks) => {
 // =====================
 // Funciones de eventos
 // =====================
-// Añadir nueva tarea
 
-// Función manejadora para añadir nuevas tareas
+// Añadir nueva tarea
 const handleclickAdd = ev => {
     // Previene el comportamiento por defecto del formulario
     ev.preventDefault();
@@ -110,7 +103,7 @@ const handleclickAdd = ev => {
         id: newId 
     });
     // Guarda las tareas actualizadas en localStorage
-    saveTasksToLocalStorage(); 
+    saveTasks();
     // Actualiza la vista, los contadores y limpia el input
     renderTasks();
     countTasks();
@@ -119,7 +112,6 @@ const handleclickAdd = ev => {
 addButton.addEventListener('click', handleclickAdd); 
 
 //Marcar y desmarcar tareas completadas
- 
 const handleCheckedTask = event => {
     // Convierte el ID de string a número
     const taskId = parseInt(event.target.id); 
@@ -132,7 +124,7 @@ const handleCheckedTask = event => {
         clickedTask.completed = !clickedTask.completed;
     }
      // Guarda las tareas actualizadas en localStorage y actualiza la vista y los contadores
-    saveTasksToLocalStorage();
+    saveTasks();
     renderTasks();
     countTasks();
 };
@@ -141,7 +133,6 @@ tasksList.addEventListener('click', handleCheckedTask);
 
 
 //Buscar tarea
-
 const handleSearchTask = (ev) => {
     ev.preventDefault();
      // Obtiene el valor del texto de búsqueda
@@ -159,7 +150,6 @@ const handleSearchTask = (ev) => {
 searchButton.addEventListener("click", handleSearchTask);
 
 //Borrar tarea
-
 const handleDeleteTask = (ev) => {
     // Verifica si el click fue en el botón de eliminar
     if(ev.target.classList.contains("js-x")) {
@@ -171,7 +161,7 @@ const handleDeleteTask = (ev) => {
         if (taskIndex !== -1) {
             tasks.splice(taskIndex, 1);
             // Guarda las tareas actualizadas en localStorage y actualiza la vista y los contadores
-            saveTasksToLocalStorage();
+            saveTasks();
             renderTasks();
             countTasks();
         }
@@ -180,9 +170,7 @@ const handleDeleteTask = (ev) => {
 
 tasksList.addEventListener("click", handleDeleteTask);
 
-//5. Contar tareas pendientes y completadas
-
-// Función para contar tareas pendientes y completadas
+//Contar tareas pendientes y completadas
 const countTasks = (tasksToCount = tasks) => {
     // Cuenta tareas completadas y pendientes
     const completedTasks = tasksToCount.filter(task => task.completed).length;
@@ -199,6 +187,6 @@ const countTasks = (tasksToCount = tasks) => {
 // =====================
 // Inicialización
 // =====================
-loadTasksFromLocalStorage(); // Carga tareas guardadas al arrancar
+loadTasks();                // Carga tareas guardadas al arrancar
 renderTasks();              // Muestra tareas en pantalla
 countTasks();               // Actualiza contadores
