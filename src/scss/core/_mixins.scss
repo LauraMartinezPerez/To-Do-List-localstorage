@@ -1,5 +1,7 @@
 @use 'variables' as vars;
 
+// Aviso: cambiar map-get() por map.get() en futuras versiones de Sass
+
 $breakpoints: (
     tablet: 768px,
     desktop: 1200px
@@ -81,7 +83,7 @@ $breakpoints: (
 }
 
 
-@mixin container-box($bg-color, $border-color, $tablet-width: 70%, $desktop-width: 50%) {
+@mixin container-box($bg-color, $border-color, $tablet-width: 70%, /* $desktop-width: 90% */) {
     background-color: $bg-color;
     display: flex;
     flex-direction: column;
@@ -98,7 +100,7 @@ $breakpoints: (
     width: $tablet-width; 
     }
 
-    @media (min-width: map-get($breakpoints, desktop)) {
+/*     @media (min-width: map-get($breakpoints, desktop)) {
     width: $desktop-width; 
-    }
+    } */
 }

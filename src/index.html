@@ -29,47 +29,49 @@
             </div>
         </header>
 
+        <div class="main-container"> 
         <!-- Indicador de tareas pendientes y completadas -->
-        <div class="current-tasks">
-            <span class="current-tasks__text">
-                <span class="current-tasks__icon">
-                    <i class="fa-solid fa-list-check"></i>
-                </span>You have
-                <span class="current-tasks__count js-pending-count">3</span>
-                tasks pending</span>
+            <div class="current-tasks">
+                <span class="current-tasks__text">
+                    <span class="current-tasks__icon">
+                        <i class="fa-solid fa-list-check"></i>
+                    </span>You have
+                    <span class="current-tasks__count js-pending-count">3</span>
+                    tasks pending</span>
 
-            <span class="current-tasks__text">
-                <span class="current-tasks__icon">
-                    <i class="fa-solid fa-list-check"></i>
-                </span>You have
-                <span class="current-tasks__count js-completed-count">3</span>
-                tasks completed</span>
-        </div>
-
-        <!-- Formulario para añadir nuevas tareas -->
-        <div class="add-container">
-            <form class="add-form" action="">
-                <input class="add-form__input js-new-input" type="text" name="new-task" id="new-task"
-                    placeholder="Add a new task">
-                <button class="add-form__button js-add-btn" type="submit">Add</button>
-            </form>
-        </div>
-
-        <!-- Contenedor principal de la lista de tareas -->
-        <section class="tasks-container">
-            <!-- Formulario de búsqueda de tareas -->
-            <form class="search-form" action="">
-                <input class="search-form__input js-search-input" type="text" name="imput-search" id="imput-search"
-                    placeholder="Search tasks">
-                <button class="search-form__button js-search-btn" type="submit">Search</button>
-            </form>
-
-            <!-- Lista dinámica donde se muestran las tareas -->
-            <div class="list">
-                <ul class="list__task js-list-task">
-                </ul>
+                <span class="current-tasks__text">
+                    <span class="current-tasks__icon">
+                        <i class="fa-solid fa-list-check"></i>
+                    </span>You have
+                    <span class="current-tasks__count js-completed-count">3</span>
+                    tasks completed</span>
             </div>
-        </section>
+
+            <!-- Formulario para añadir nuevas tareas -->
+            <div class="add-container">
+                <form class="add-form" action="">
+                    <input class="add-form__input js-new-input" type="text" name="new-task" id="new-task"
+                        placeholder="Add a new task">
+                    <button class="add-form__button js-add-btn" type="submit">Add</button>
+                </form>
+            </div>
+
+            <!-- Contenedor principal de la lista de tareas -->
+            <section class="tasks-container">
+                <!-- Formulario de búsqueda de tareas -->
+                <form class="search-form" action="">
+                    <input class="search-form__input js-search-input" type="text" name="imput-search" id="imput-search"
+                        placeholder="Search tasks">
+                    <button class="search-form__button js-search-btn" type="submit">Search</button>
+                </form>
+
+                <!-- Lista dinámica donde se muestran las tareas -->
+                <div class="list">
+                    <ul class="list__task js-list-task">
+                    </ul>
+                </div>
+            </section>
+        </div>
 
         <!-- Pie de página con autoría y enlace a GitHub -->
         <footer class="footer">This website has been developed by <a class="footer__link"
