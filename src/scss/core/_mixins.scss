@@ -12,7 +12,7 @@ $breakpoints: (
     align-items: center;
     justify-content: space-between;
     gap: 20px;
-    width: 90%;
+    width: 100%;
 
     &__input {
     height: 60px;
@@ -83,7 +83,7 @@ $breakpoints: (
 }
 
 
-@mixin container-box($bg-color, $border-color, $tablet-width: 70%, /* $desktop-width: 90% */) {
+@mixin container-box($bg-color, $border-color, $tablet-width: 70%, $desktop-width: 90%) {
     background-color: $bg-color;
     display: flex;
     flex-direction: column;
