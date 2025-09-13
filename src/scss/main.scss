@@ -72,13 +72,21 @@
 }
 
 .main-container {
+    background-color: cadetblue;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;    
+    
+    // Media query for desktop
+    @media (min-width: 1200px) {
+        flex-direction: row;
+        align-items: flex-start;
+    }
 
     &__counter-add {
+        background-color: darksalmon;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -86,11 +94,12 @@
         width: 100%;
         margin-bottom: 20px;
 
+        // Media query for desktop
         @media (min-width: 1200px) {
-            flex-direction: row;
-            justify-content: space-between;
-            width: 90%;
-            max-width: 900px;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: start;
+            width: 40%;
         }
 
     }
@@ -112,8 +121,13 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
 
     /* Media query for tablet */
-   @media (min-width: 768px) {
+    @media (min-width: 768px) {
         width: 50%;
+    }
+    /* Media query for desktop */
+    @media (min-width: 1200px) {
+        width: 90%;
+        margin-left: 20px;
     }
 
     &__icon {
@@ -132,7 +146,17 @@
 }
 
 .add-container {
-    @include mixins.container-box(vars.$color-yellow, vars.$color-brown);
+    background-color: vars.$color-yellow;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+    padding: 15px;
+    border-radius: 30px;
+    border: 5px solid vars.$color-brown;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    width: 90%;
 }
 
 .add-form {
@@ -140,7 +164,17 @@
 }
 
 .tasks-container {
-    @include mixins.container-box(vars.$color-sky, vars.$color-brown);
+    background-color: vars.$color-sky;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 30px;
+    padding: 15px;
+    border-radius: 30px;
+    border: 5px solid vars.$color-brown;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    width: 90%;
     gap: 15px;
 }
 
@@ -149,7 +183,12 @@
 }
 
 .list {
-    @include mixins.container-box(vars.$color-subBg-cream, vars.$color-brown);
+    background-color: vars.$color-subBg-cream;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    margin-bottom: 20px;
+    gap: 15px;
     border-radius: 30% 2% 30% 2% / 10% 50% 10% 50%;
     border: 3px solid vars.$color-brown;
     width: 100%;

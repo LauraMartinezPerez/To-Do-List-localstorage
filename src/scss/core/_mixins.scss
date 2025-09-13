@@ -84,7 +84,7 @@ $breakpoints: (
 }
 
 
-@mixin container-box($bg-color, $border-color, $tablet-width: 70%, $desktop-width: 90%) {
+/* @mixin container-box($bg-color, $border-color, $tablet-width: 70%, $desktop-width: 450px) {
     background-color: $bg-color;
     display: flex;
     flex-direction: column;
@@ -101,7 +101,8 @@ $breakpoints: (
     width: $tablet-width; 
     }
 
-/*     @media (min-width: map-get($breakpoints, desktop)) {
+     @media (min-width: map-get($breakpoints, desktop)) {
     width: $desktop-width; 
-    } */
-}
+    margin-left: 20px;
+    }
+} */
