@@ -1,5 +1,12 @@
 @use 'variables' as vars;
-  
+  // Aviso: cambiar map-get() por map.get() en futuras versiones de Sass
+
+  $breakpoints: (
+    tablet: 768px,
+    standard desktop: 1024px,
+    large screen: 1200px
+);
+
   @mixin form-style($border-color, $bg-input, $button-bg, $button-color) {
     display: flex;
     align-items: center;
@@ -22,7 +29,7 @@
     &__input::placeholder {
         font-family: vars.$font-main;
         font-size: 20px;
-        color: vars.$color-brown;
+        color: rgba(vars.$color-brown, 0.6);
         font-weight: 600;
     }
 
@@ -45,18 +52,46 @@
             scale: 1.05;
         }
     }
+    // Media queries fot tablet
+    @media (min-width: map-get($breakpoints, tablet)) {
+        &__input {
+            height: 70px;
+            font-size: 18px;
+            padding: 0 15px;
+        }
+
+        &__button {
+            padding: 10px 20px;
+            font-size: 22px;
+        }
+    }
+
+    // Media queries fot standard desktop
+    @media (min-width: map-get($breakpoints, standard desktop)) {
+        &__input {
+            height: 60px;
+            font-size: 20px;
+            padding: 0 20px;
+        }
+
+        &__button {
+            padding: 8px 25px;
+            font-size: 24px;
+        }
+    }
+    // Media queries fot large screen
+    @media (min-width: map-get($breakpoints, large screen)) {
+        &__input {
+            height: 60px;
+            font-size: 20px;
+            padding: 0 20px;
+        }
+
+        &__button {
+            padding: 8px 25px;
+            font-size: 24px;
+        }
+    }
 }
 
 
-@mixin container-box($bg-color, $border-color) {
-  background-color: $bg-color;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 30px;
-  padding: 15px;
-  border-radius: 30px;
-  border: 5px solid $border-color;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-  margin-bottom: 20px;
-}

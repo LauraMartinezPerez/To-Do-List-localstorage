@@ -35,7 +35,7 @@ overlayAlert.addEventListener("click", handleCloseOverlay);
 
 
 
-// Array inicial de tareas con algunos ejemplos
+// Array inicial de tareas
 let tasks = [];
 /*  [
     { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
