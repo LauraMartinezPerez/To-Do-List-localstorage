@@ -10,15 +10,60 @@ const xbutton = document.querySelector('.js-x');
 const pendingCount = document.querySelector('.js-pending-count');
 const completedCount = document.querySelector('.js-completed-count');
 
+const overlayAlert = document.querySelector('.js-overlay-alert');
+const overlayErrorMessage = document.querySelector('.js-overlay-error-message');
+const overlayClose = document.querySelector('.js-overlay-close');
+
+//Muestra una alerta personalizada
+const showOverlayError = (message) => {
+    overlayErrorMessage.textContent = message;
+    overlayAlert.style.display = "flex";
+    newTaskInput.value = '';
+};
+//Cierra al hacer click en el botón
+const hideOverlayError = () => {
+    overlayAlert.style.display = "none";
+};
+overlayClose.addEventListener('click', hideOverlayError);
+//Cerrar al hacer click en cualquier parte del overlay
+const handleCloseOverlay = (e) => {
+    if (e.target === overlayAlert) {
+        hideOverlayError();
+    }
+};
+overlayAlert.addEventListener("click", handleCloseOverlay);
+
+
 
 // Array inicial de tareas con algunos ejemplos
-let tasks = 
- [
+let tasks = [];
+/*  [
     { name: 'Medico el 24/03/25 a las 9:30h', completed: true, id: 1 },
     { name: 'Comprar fruta', completed: true, id: 2 },
     { name: 'Poner una lavadora', completed: true, id: 3 },
     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
-]; 
+];  */
+
+
+// Función para guardar las tareas en localStorage
+ const saveTasksToLocalStorage = () => {
+    localStorage.setItem("savedTasks", JSON.stringify(tasks)); //convierte el array en JSON en string y lo guarda en localStorage con el nombre "tasks" (clave) y el array de tareas ( tasks);
+    
+    console.log(typeof JSON.stringify(tasks));
+    console.log(JSON.stringify(tasks));
+} 
+
+//Funcion para cargar las tareas desde localStorage al iniciar la aplicación
+ const loadTasksFromLocalStorage = () => {
+    const savedTasks = localStorage.getItem("savedTasks"); //recoge el array de tareas guardado en localStorage con la clave "tasks"
+    if (savedTasks) { //si hay tareas guardadas
+        tasks = JSON.parse(savedTasks); //convierte el string JSON de nuevo a un array y lo asigna a la variable tasks
+    }
+    console.log(typeof JSON.parse(savedTasks));
+    console.log(JSON.parse(savedTasks));
+}
+ 
+
 
 const renderLoading = () => {
     tasksList.innerHTML = '<li>Cargando tareas...</li>';
@@ -61,10 +106,14 @@ const renderLoading = () => {
 
 // Función manejadora para añadir nuevas tareas
 const handleclickAdd = ev => {
-    // Previene el comportamiento por defecto del formulario
     ev.preventDefault();
-    // Recoge el texto introducido en el input
-    const newTaskInputValue = newTaskInput.value;
+    // Recoge el texto introducido en el input contemplando espacios en blanco
+    const newTaskInputValue = newTaskInput.value.trim();
+    // si el valor esta vacio, no añade la tarea y muestra una alerta
+    if (newTaskInputValue === "") {
+        showOverlayError("No se puede añadir una tarea vacia.");
+        return;
+    }
     // Genera un ID único encontrando el ID máximo actual y sumando 1
     const maxId = Math.max(...tasks.map(task => task.id), 0);
     const newId = maxId + 1;
@@ -74,11 +123,28 @@ const handleclickAdd = ev => {
         completed: false, 
         id: newId 
     });
+ 
+    // Guarda las tareas actualizadas en localStorage
+    const stringTasks = JSON.stringify(tasks); //convierte el array en JSON en string y lo guarda en localStorage
+    localStorage.setItem("savedTasks", stringTasks); 
+
+    //Mostrar las tasks guardadas en localStorage al recargar la página
+    const savedTasks = localStorage.getItem("savedTasks"); 
+    console.log(savedTasks); //recoge el array de tareas guardado en localStorage con la clave "tasks"
+
+
+/*     const savedTasks = localStorage.getItem("savedTasks"); //recoge el array de tareas guardado en localStorage con la clave "tasks"
+    if (savedTasks) { //si hay tareas guardadas
+        tasks = JSON.parse(savedTasks); //convierte el string JSON de nuevo a un array y lo asigna a la variable tasks
+    } */
+
     // Actualiza la vista, los contadores y limpia el input
     renderTasks();
     countTasks();
     newTaskInput.value = '';
 };
+
+
 
 addButton.addEventListener('click', handleclickAdd); 
 
