@@ -19,50 +19,6 @@
     }
 }
 
-.overlay-alert {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    font-family: vars.$font-main;
-    color: vars.$color-brown;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-
-    &__content {
-        background-color: rgba(vars.$color-bg-beige, 0.95);
-        padding: 20px 30px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        max-width: 300px;
-        width: 80%;
-    }
-
-    &__close {
-        margin-top: 15px;
-        padding: 10px 20px;
-        background-color: vars.$color-pink;
-        color: vars.$color-bg-beige;
-        font-family: vars.$font-button;
-        font-size: 1.1rem;
-        letter-spacing: 2px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-
-        &:hover {
-            
-            scale: 1.05;
-        }
-    }
-}
-
 .current-tasks {
     display: flex;
     flex-direction: column;
