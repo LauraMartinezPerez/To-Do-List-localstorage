@@ -44,9 +44,10 @@ let tasks = [];
     { name: 'Aprender cómo se realizan las peticiones al servidor en JavaScript', completed: false, id: 4 }
 ];  */
 
+//Funciones de LocalSotorage
 
 // Función para guardar las tareas en localStorage
- const saveTasksToLocalStorage = () => {
+ const saveTasks = () => {
     localStorage.setItem("savedTasks", JSON.stringify(tasks)); //convierte el array en JSON en string y lo guarda en localStorage con el nombre "tasks" (clave) y el array de tareas ( tasks);
     
     console.log(typeof JSON.stringify(tasks));
@@ -54,22 +55,22 @@ let tasks = [];
 } 
 
 //Funcion para cargar las tareas desde localStorage al iniciar la aplicación
- const loadTasksFromLocalStorage = () => {
-    const savedTasks = localStorage.getItem("savedTasks"); //recoge el array de tareas guardado en localStorage con la clave "tasks"
-    if (savedTasks) { //si hay tareas guardadas
-        tasks = JSON.parse(savedTasks); //convierte el string JSON de nuevo a un array y lo asigna a la variable tasks
+const loadTasks = () => {
+    const savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+    if (savedTasks) {
+        tasks = savedTasks;
     }
-    console.log(typeof JSON.parse(savedTasks));
-    console.log(JSON.parse(savedTasks));
 }
  
+//Renderizado de tareas
 
+// Renderiza un mensaje de carga mientras se obtienen las tareas
 
 const renderLoading = () => {
     tasksList.innerHTML = '<li>Cargando tareas...</li>';
 };
 
-// Función para pintar todas las tareas en el DOM
+// Renderizar todas las tareas en el DOM
  const renderTasks = () => {
     // Inicializa string vacío para ir concatenando el HTML
     let list = '';
@@ -99,12 +100,25 @@ const renderLoading = () => {
     }
     // Inserta todo el HTML generado en el contenedor de tareas
     tasksList.innerHTML = list;
-
 }; 
 
-//1. Añadir nueva tarea
+// Renderiza tareas filtradas
+const renderFilteredTasks = (filteredTasks) => {
+     // Similar a renderTasks pero usando el array filtrado
+    let list = '';
+    for (const task of filteredTasks) {
+        list += `<li>
+            <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
+            <input type="checkbox" id="${task.id}" ${task.completed ? 'checked' : ''}>
+            <label class="${task.completed ? 'crossed-out-task' : ''}" for="${task.id}">${task.name}</label>
+            </li>`;
+    }
+    tasksList.innerHTML = list;
+}
 
-// Función manejadora para añadir nuevas tareas
+//Funciones de eventos
+
+// Añadir nueva tarea
 const handleclickAdd = ev => {
     ev.preventDefault();
     // Recoge el texto introducido en el input contemplando espacios en blanco
@@ -123,34 +137,18 @@ const handleclickAdd = ev => {
         completed: false, 
         id: newId 
     });
- 
+
     // Guarda las tareas actualizadas en localStorage
-    const stringTasks = JSON.stringify(tasks); //convierte el array en JSON en string y lo guarda en localStorage
-    localStorage.setItem("savedTasks", stringTasks); 
-
-    //Mostrar las tasks guardadas en localStorage al recargar la página
-    const savedTasks = localStorage.getItem("savedTasks"); 
-    console.log(savedTasks); //recoge el array de tareas guardado en localStorage con la clave "tasks"
-
-
-/*     const savedTasks = localStorage.getItem("savedTasks"); //recoge el array de tareas guardado en localStorage con la clave "tasks"
-    if (savedTasks) { //si hay tareas guardadas
-        tasks = JSON.parse(savedTasks); //convierte el string JSON de nuevo a un array y lo asigna a la variable tasks
-    } */
-
+    saveTasks();
     // Actualiza la vista, los contadores y limpia el input
     renderTasks();
     countTasks();
     newTaskInput.value = '';
 };
-
-
-
 addButton.addEventListener('click', handleclickAdd); 
 
-//2. Tachar tarea completada
- 
-// Función manejadora para marcar/desmarcar tareas como completadas
+
+// Marcar/desmarcar tareas como completadas
 const handleCheckedTask = event => {
     // Convierte el ID de string a número
     const taskId = parseInt(event.target.id); 
@@ -162,7 +160,8 @@ const handleCheckedTask = event => {
     if (clickedTask) {
         clickedTask.completed = !clickedTask.completed;
     }
-     // Actualiza la vista y los contadores
+     // Guarda las tareas actualizadas en localStorage y actualiza la vista y los contadores
+    saveTasks();
     renderTasks();
     countTasks();
 };
@@ -170,9 +169,7 @@ const handleCheckedTask = event => {
 tasksList.addEventListener('click', handleCheckedTask); 
 
 
-//3. Buscar tarea
-
-// Función manejadora para buscar tareas
+//Buscar tarea
 const handleSearchTask = (ev) => {
     ev.preventDefault();
      // Obtiene el valor del texto de búsqueda
@@ -187,24 +184,9 @@ const handleSearchTask = (ev) => {
     searchInput.value = '';
 }
 
-// Función para mostrar tareas filtradas
-const renderFilteredTasks = (filteredTasks) => {
-     // Similar a renderTasks pero usando el array filtrado
-    let list = '';
-    for (const task of filteredTasks) {
-        list += `<li>
-            <i class="fa-solid fa-circle-xmark js-x" id="${task.id}"></i>
-            <input type="checkbox" id="${task.id}" ${task.completed ? 'checked' : ''}>
-            <label class="${task.completed ? 'crossed-out-task' : ''}" for="${task.id}">${task.name}</label>
-            </li>`;
-    }
-    tasksList.innerHTML = list;
-}
-
 searchButton.addEventListener("click", handleSearchTask);
 
-//4. Borrar tarea
-
+//Borrar tarea
 const handleDeleteTask = (ev) => {
     // Verifica si el click fue en el botón de eliminar
     if(ev.target.classList.contains("js-x")) {
@@ -215,7 +197,8 @@ const handleDeleteTask = (ev) => {
         // Si encuentra la tarea, la elimina
         if (taskIndex !== -1) {
             tasks.splice(taskIndex, 1);
-            //pinta las tareas y el contador actualizados
+            // Guarda las tareas actualizadas en localStorage y actualiza la vista y los contadores
+            saveTasks();
             renderTasks();
             countTasks();
         }
@@ -224,9 +207,8 @@ const handleDeleteTask = (ev) => {
 
 tasksList.addEventListener("click", handleDeleteTask);
 
-//5. Contar tareas pendientes y completadas
 
-// Función para contar tareas pendientes y completadas
+// Contar tareas pendientes y completadas
 const countTasks = (tasksToCount = tasks) => {
     // Cuenta tareas completadas y pendientes
     const completedTasks = tasksToCount.filter(task => task.completed).length;
@@ -240,6 +222,7 @@ const countTasks = (tasksToCount = tasks) => {
     }
 }
 
-// Renderiza las tareas iniciales y los contadores al cargar la página
-renderTasks();
-countTasks();
+// Inicialización
+loadTasks();                // Carga tareas guardadas al arrancar
+renderTasks();              // Muestra tareas en pantalla
+countTasks();               // Actualiza contadores
