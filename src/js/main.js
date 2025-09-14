@@ -180,7 +180,7 @@ tasksList.addEventListener('click', handleCheckedTask);
 const handleSearchTask = (ev) => {
     ev.preventDefault();
      // Obtiene el valor del texto de búsqueda
-    const searchInputValue = searchInput.value;
+    const searchInputValue = searchInput.value.trim();
     // Filtra las tareas que contengan el texto sin hacer distinción de mayúsculas/minúsculas
     const filteredTasks = tasks.filter(task => 
         task.name.toLowerCase().includes(searchInputValue.toLowerCase())
