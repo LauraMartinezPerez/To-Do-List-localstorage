@@ -14,12 +14,19 @@ const overlayAlert = document.querySelector('.js-overlay-alert');
 const overlayErrorMessage = document.querySelector('.js-overlay-error-message');
 const overlayClose = document.querySelector('.js-overlay-close');
 
-//Muestra una alerta personalizada
+
+const overlaySearchErrorMessage = document.querySelector('.js-overlay-search-error-message');
+
+
+//Muestra una alerta personalizada (add input)
 const showOverlayError = (message) => {
     overlayErrorMessage.textContent = message;
     overlayAlert.style.display = "flex";
     newTaskInput.value = '';
+    searchInput.value = '';
 };
+
+
 //Cierra al hacer click en el botón
 const hideOverlayError = () => {
     overlayAlert.style.display = "none";
@@ -178,6 +185,13 @@ const handleSearchTask = (ev) => {
     const filteredTasks = tasks.filter(task => 
         task.name.toLowerCase().includes(searchInputValue.toLowerCase())
     );
+
+    // Si no hay tareas que coincidan  muestra una alerta 
+    if (filteredTasks.length === 0 || searchInputValue === "") {
+        showOverlayError("No se han encontrado tareas que coincidan con la búsqueda.");
+        return;
+    }
+
     // Muestra las tareas filtradas, actualiza contadores y limpia el input
     renderFilteredTasks(filteredTasks);
     countTasks(filteredTasks); 
