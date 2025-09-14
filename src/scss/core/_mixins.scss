@@ -1,4 +1,4 @@
-  @use 'variables' as vars;
+@use 'variables' as vars;
   
   @mixin form-style($border-color, $bg-input, $button-bg, $button-color) {
     display: flex;
