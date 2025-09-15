@@ -71,11 +71,6 @@ const loadTasks = () => {
  
 //Renderizado de tareas
 
-// Renderiza un mensaje de carga mientras se obtienen las tareas
-
-const renderLoading = () => {
-    tasksList.innerHTML = '<li>Cargando tareas...</li>';
-};
 
 // Renderizar todas las tareas en el DOM
  const renderTasks = () => {
@@ -204,7 +199,7 @@ searchButton.addEventListener("click", handleSearchTask);
 const handleDeleteTask = (ev) => {
     // Verifica si el click fue en el botón de eliminar
     if(ev.target.classList.contains("js-x")) {
-        // Obtiene el ID de la tarea a eliminar
+        // Obtiene el ID de la tarea a eliminar (convierte a número)
         const taskId = parseInt(ev.target.id);        
         // Encuentra el índice de la tarea en el array
         const taskIndex = tasks.findIndex(task => task.id === taskId);        
