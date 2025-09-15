@@ -9,17 +9,20 @@ _(por ahora local con `npm run dev` y enlace [SuperToDoList](https://lauramartin
 
 ## ✨ Funcionalidades
 
-- ➕ **Añadir** tareas 
+- ➕ **Añadir** tareas
 - ✅ **Marcar/Desmarcar** tarea como completada 
 - ❌ **Eliminar** tareas con icono de cierre
 - 🔎 **Buscar** tareas por texto (filtro con case-insensitive).
 - 🔢 **Contadores en vivo** de pendientes y completadas (también al filtrar).
 - 💾 **Persistencia local** usando `localStorage`.
 - 📱 **Optimización responsive** para móviles, tablets, desktop estándar y pantallas grandes (media queries).
+- ⚠️ **Control de errores y alertas**: avisos claros si:
+  - Se intenta añadir una tarea vacía.
+  - No se encuentra ninguna tarea al buscar.
 
 ## 🎨 Diseño
 
-- Estilo **divertido, colorido y dinámico**
+- Estilo **desenfadado, divertido y dinámico**
 - **Iconografía**: Font Awesome.
 - **SCSS modular** (reset + + variables + mixins + estilos), orientado a componentes.
 - Layout **responsive** ycon media queries y preparado para animaciones suaves y micro-interacciones.
